@@ -10,7 +10,13 @@ public class Enemy : MonoBehaviour
     public float health = 10;
     public int score = 100;
 
-    public Vector3 pos {
+    private BoundsCheck bndCheck;
+
+    private void Awake()
+    {
+        bndCheck = GetComponent<BoundsCheck>();
+    }
+	public Vector3 pos {
         get{
             return (this.transform.position);
         }
@@ -28,6 +34,12 @@ public class Enemy : MonoBehaviour
 	void Update () 
     {
         Move();
+
+        if(bndCheck != null && bndCheck.offDown)
+        { 
+            //We're off the bottom, so destroy this GameObject
+            Destroy(gameObject);
+        }
 	}
 
     public virtual void Move()
