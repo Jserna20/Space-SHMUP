@@ -22,12 +22,18 @@ public class Hero : MonoBehaviour
     //This variable holds a reference to the last triggering GameObject
     private GameObject lastTriggeredGo = null;
 
+    public delegate void WeaponFireDelegate();
+
+    public WeaponFireDelegate fireDelegate;
+
     private void Awake()
     {
         if (S == null)
             S = this;
         else
             Debug.LogError("Hero.Awake() - Attempted tp assign second Hero.S!");
+
+       // fireDelegate += TempFire;
     }
 
 	
@@ -57,7 +63,12 @@ public class Hero : MonoBehaviour
         GameObject projGO = Instantiate<GameObject>(projectilePrefab);
         projGO.transform.position = transform.position;
         Rigidbody rigidB = projGO.GetComponent<Rigidbody>();
-        rigidB.velocity = Vector3.up * projectileSpeed;
+        //rigidB.velocity = Vector3.up * projectileSpeed;
+
+        Projectile proj = projGO.GetComponent<Projectile>();
+        proj.type = WeaponType.blaster;
+        float tSpeed = Main.GetWeaponDefinition(proj.type).velocity;
+        rigidB.velocity = Vector3.up * tSpeed;
     }
 
 	private void OnTriggerEnter(Collider other)

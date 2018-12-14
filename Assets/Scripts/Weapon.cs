@@ -14,7 +14,7 @@ public enum WeaponType
 }
 
 [System.Serializable]
-public class WeaponDefition
+public class WeaponDefinition
 {
     public WeaponType type = WeaponType.none;
     public string letter;
@@ -28,11 +28,19 @@ public class WeaponDefition
 }
 public class Weapon : MonoBehaviour
 {
+    static public Transform PROJECTILE_ANCHOR;
+
+    [Header("Set Dynamically")]
+    private WeaponType _type = WeaponType.none;
+    public WeaponDefinition def;
+    public GameObject collar;
+    public float lastShotTime;
+    private Renderer rend;
 
 	// Use this for initialization
 	void Start ()
     {
-		
+        collar = transform.Find("Collar").gameObject;
 	}
 	
 	// Update is called once per frame
