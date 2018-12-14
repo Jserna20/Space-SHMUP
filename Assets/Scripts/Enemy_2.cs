@@ -50,6 +50,6 @@ public class Enemy_2 : Enemy
 
         pos = (1 - u) * p0 + u * p1;
 
-        base.Move();
+        
     }
 }
