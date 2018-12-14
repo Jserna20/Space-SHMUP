@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Main : MonoBehaviour 
+public class Main : MonoBehaviour
 {
     static public Main S;
 
@@ -13,16 +12,16 @@ public class Main : MonoBehaviour
     public float enemySpawnPerSecond = 0.5f;
     public float enemyDefaultPadding = 1.5f;
 
-    private BoundsCheck bndCheck;
+    public BoundsCheck bndCheck;
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         S = this;
         //Set bndCheck to reference teh BoundsCheck component on this GameObject
         bndCheck = GetComponent<BoundsCheck>();
         //Invoke SpawnEnemy() once (in 2 seconds, based on default values
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
-	}
+    }
 
     public void SpawnEnemy()
     {
@@ -32,7 +31,7 @@ public class Main : MonoBehaviour
 
         //Position the Enemy above the screen with a random x position
         float enemyPadding = enemyDefaultPadding;
-        if(go.GetComponent<BoundsCheck>() != null)
+        if (go.GetComponent<BoundsCheck>() != null)
         {
             enemyPadding = Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
         }
@@ -47,17 +46,8 @@ public class Main : MonoBehaviour
         //Invoke SpawnEnemy() again
         Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void DelayedRestart(float delay)
+public void DelayedRestart(float delay)
     {
         Invoke("Restart", delay);
     }
