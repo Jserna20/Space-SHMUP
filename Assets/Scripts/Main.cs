@@ -16,7 +16,7 @@ public class Main : MonoBehaviour
 
     public BoundsCheck bndCheck;
 
-    private void Awake()
+    private void Start()
     {
         S = this;
         //Set bndCheck to reference teh BoundsCheck component on this GameObject
