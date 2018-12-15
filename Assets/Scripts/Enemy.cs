@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     static public float health = 10;
     public int score = 100;
     public float showDamageDuration = 0.1f;
+    public float powerUpDropChance = 1f;
 
     [Header("Set Dynamically: Enemy")]
     public Color[] originalColors;
@@ -109,10 +110,17 @@ public class Enemy : MonoBehaviour
                 }
                 ShowDamage();
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
+                // I suspect that somewhere here is where it isn't allowing me to damage the enemies
                 if (health <= 0)
+                {
+                    if (!notifiedOfDestruction)
+                        Main.S.ShipDestroyed(this);
+                    
+                    notifiedOfDestruction = true;
                     Destroy(this.gameObject);
-
-                //Destroy(otherGO);
+                }
+                Destroy(otherGO);
+                Destroy(gameObject);
                 break;
 
             default:
