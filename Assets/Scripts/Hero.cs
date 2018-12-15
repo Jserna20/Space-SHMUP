@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     [Header("Set Dynamically")]
     [SerializeField]
-    private float _shieldLevel = 1;
+    private float _shieldLevel = 4;
 
     //This variable holds a reference to the last triggering GameObject
     private GameObject lastTriggeredGo = null;
@@ -55,7 +55,12 @@ public class Hero : MonoBehaviour
 
         //Allow the ship to fire
         if (Input.GetKeyDown(KeyCode.Space))
-            TempFire();
+           TempFire();
+
+        if(Input.GetAxis("Jump") == 1 && fireDelegate != null )
+        {
+            fireDelegate();
+        }
 	}
 
     void TempFire()

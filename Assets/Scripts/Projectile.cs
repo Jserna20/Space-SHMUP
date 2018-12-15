@@ -47,4 +47,5 @@ public class Projectile : MonoBehaviour
         WeaponDefinition def = Main.GetWeaponDefinition(_type);
         rend.material.color = def.projectileColor;
     }
+
 }
